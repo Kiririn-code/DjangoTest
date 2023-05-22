@@ -21,6 +21,7 @@ from women.views import *
 from django.urls import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='redirectName'),
     path('', include('women.url')),
 ]
+handler404 = notFoundError
