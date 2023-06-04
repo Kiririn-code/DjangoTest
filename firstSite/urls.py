@@ -24,4 +24,4 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='redirectName'),
     path('', include('women.url')),
 ]
-handler404 = notFoundError
+handler404 = not_found_error

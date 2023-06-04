@@ -14,5 +14,9 @@ def categories(request, catId):
     return HttpResponse(f'категория {catId}')
 
 
-def notFoundError(request, exception):
+def post(request, postId):
+    return HttpResponse(f'post - {postId}')
+
+
+def not_found_error(request, exception):
     return HttpResponseNotFound(f'ошибка')
