@@ -22,6 +22,7 @@ from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='redirectName'),
-    path('', include('women.url')),
+    path('women/', include('women.url')),
+    path('sportstore/', include('sportstore.urls')),
 ]
 handler404 = not_found_error
