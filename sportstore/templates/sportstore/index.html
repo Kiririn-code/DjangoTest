@@ -1,25 +1,25 @@
 {% extends 'sportstore/base.html' %}
-
 {% block body %}
 <table class="table table-sm table-bordered table-striped table-dark">
-  <thead>
+    <thead>
     <tr>
-      <th>product name</th>
-      <th>price</th>
-      <th>description</th>
-      <th>category</th>
+        <th>product name</th>
+        <th>price</th>
+        <th>description</th>
+        <th>category</th>
+        <th></th>
     </tr>
-  </thead>
-  <tbody>
-  {% for d in data %}
+    </thead>
+    <tbody>
+    {% for d in data %}
     <tr>
-      <td> {{ d.title }} </td>
-      <td> {{ d.price }} </td>
-      <td> {{ d.description }} </td>
-      <td> {{ d.category.name }} </td>
-      <td> <a class="btn btn-primary" href="update/{{ d.pk }}"> fix </a> </td>
+        <td> {{ d.title }}</td>
+        <td> {{ d.price }}</td>
+        <td> {{ d.description }}</td>
+        <td> {{ d.category.name }}</td>
+        <td><a class="btn btn-primary" href="{% url 'update' d.pk %}"> fix </a></td>
     </tr>
-  {% endfor %}
-  </tbody>
+    {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

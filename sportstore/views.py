@@ -1,5 +1,5 @@
 from django.http import *
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 
@@ -9,14 +9,17 @@ def StartPage(request):
 
 def Index(request):
     product = Product.objects.all()
-    return render(request, 'index', {'data': product})
+    return render(request, 'sportstore/index.html', {'data': product})
 
 
 def CreateProduct(request):
     if request.method == 'POST':
         new_product = Product()
         new_product.title = request.POST.get("title")
-    return HttpResponseRedirect("/")
+        new_product.save()
+        return redirect(Index)
+    else:
+        return render(request, 'sportstore/createProduct.html')
 
 
 def UpdateProduct(request, pkProd):
@@ -26,8 +29,8 @@ def UpdateProduct(request, pkProd):
             product.title = request.POST.get('title')
             product.description = request.POST.get('description')
             product.save()
-            return HttpResponseRedirect("/")
+            return redirect(Index)
         else:
-            return render(request, "update", {"product": product})
+            return render(request, "sportstore/updateProduct.html", {"product": product})
     except product.DoesNotExist:
         return HttpResponseNotFound()
