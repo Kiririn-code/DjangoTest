@@ -16,6 +16,8 @@ def CreateProduct(request):
     if request.method == 'POST':
         new_product = Product()
         new_product.title = request.POST.get("title")
+        new_product.description = request.POST.get('description')
+        new_product.price = request.POST.get('price')
         new_product.save()
         return redirect(Index)
     else:
