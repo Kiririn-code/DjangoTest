@@ -1,5 +1,4 @@
 from django.urls import path
-
 from sportstore.views import *
 
 urlpatterns = [

@@ -25,7 +25,15 @@ SECRET_KEY = 'django-insecure-2^=5^hw%9!83uh5pwcotpk9&c)71czzw#qwv8lw8=mqk_kggd*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CACHE_MIDDLEWARE_ALIAS = ' '
+CACHE_MIDDLEWARE_SECONDS = 600
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
 ALLOWED_HOSTS = []
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',  # Add your development machine's IP address here
+]
 
 
 # Application definition
@@ -39,16 +47,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'women.apps.WomenConfig',
     'sportstore.apps.SportstoreConfig',
+    'debug_toolbar',
+    'cachedapplication',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'firstSite.urls'
@@ -79,10 +93,21 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'postgres',
+        'USER': 'pi',
         'PASSWORD': '3141592',
-        'HOST': '194.35.119.145',
+        'HOST': '10.0.0.6',
         'PORT': ''}
+}
+
+# A dictionary named CACHES, which contains caching configurations.
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://10.0.0.6:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
 }
 
 
